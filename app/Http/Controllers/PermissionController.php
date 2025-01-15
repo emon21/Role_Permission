@@ -56,24 +56,44 @@ class PermissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Permission $permission)
     {
         //
+        return view('role-permission.permission.edit',['permission' => $permission ]);
+
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Permission $permission)
     {
-        //
+        // $request->validate([
+        //     'name' => [
+        //         'required',
+        //         'string',
+        //         'unique:permissions,name',
+        //     ],
+
+        // ]);
+
+      //  Permission::findOrFail($id)->update(['name'=> $request->name]);
+
+        $permission->name = $request->name;
+        $permission->save();
+        return redirect('permission')->with('success', 'Permission Update Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Permission $permission)
     {
         //
+       $permission->delete();
+    //    Permission::destroy($permission->id);
+
+        return redirect('permission')->with('success', 'Permission Deleted Successfully');
     }
 }

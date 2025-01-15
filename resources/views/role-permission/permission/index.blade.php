@@ -24,7 +24,9 @@
 
     <div class="w-10/12 mx-auto bg-green-500 my-3 rounded-lg">
         @if (session('success'))
-            <div class="text-lg px-3 py-2 text-white">{{ session('success') }}</div>
+            <div class="text-lg px-3 py-2 text-white text-center">
+               {{ session('success') }}
+            </div>
         @endif
         <div class="flex justify-between py-3 px-2">
             <h4 class="py-3 text-lg font-semibold">Permission</h4>
@@ -59,15 +61,20 @@
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $loop->index + 1 }}
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 capitalize">
                                 {{ $permission->name }}
                             </td>
                            
-                            <td class="px-6 py-4">
-                                <a href="#"
-                                    class="font-medium text-white bg-green-500 hover:bg-green-700 transition-all duration-300 ease-in-out px-1.5 py-2 rounded">Edit</a> |
-                                     <a href="#"
-                                    class="font-medium text-white bg-red-500 hover:bg-red-700 transition-all duration-300 ease-in-out px-1.5 py-2 rounded">Delete</a>
+                            <td class="px-6 py-4 flex gap-3">
+                                <a href="{{ route('permission.edit',$permission->id) }}"
+                                    class="font-medium text-white bg-green-500 hover:bg-green-700 transition-all duration-300 ease-in-out px-1.5 py-2 rounded">Edit</a> 
+
+                                    <form action="{{ route('permission.destroy',$permission->id) }}" method="POST">
+                                       @csrf
+                                       @method('delete')
+                                       <button type="submit" class="font-medium text-white bg-red-500 hover:bg-red-700 transition-all duration-300 ease-in-out px-1.5 py-2 rounded">Delete</button>
+                                    </form>
+                                     
                             </td>
                         </tr>
                      @empty
