@@ -77,11 +77,11 @@ class RoleController extends Controller
             ],
         ]);
 
-        $role->name = $request->input('name');
-        $role->save();
+        $role->update([
+            'name' => $request->name
+        ]);
 
         return redirect('role')->with('success', 'Role Updated Successfully');
-        
     }
 
     /**

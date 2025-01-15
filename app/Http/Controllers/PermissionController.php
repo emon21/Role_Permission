@@ -77,10 +77,12 @@ class PermissionController extends Controller
             ],
         ]);
 
-      //  Permission::findOrFail($id)->update(['name'=> $request->name]);
+        //  Permission::findOrFail($id)->update(['name'=> $request->name]);
 
-        $permission->name = $request->name;
-        $permission->save();
+        $permission->update([
+            'name' => $request->name
+        ]);
+        
         return redirect('permission')->with('success', 'Permission Update Successfully');
     }
 
