@@ -1,20 +1,21 @@
 <x-app-layout>
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Permission') }}
+            {{ __('Role Management') }}
         </h2>
     </x-slot>
-  
+
     @if(session('success'))
     <div class="px-2 py-5 text-lg font-semibold text-center text-green-700">{{ session('success') }}</div>
     @endif
-
+    
     <div class="max-w-7xl mx-auto  lg:px-7 pb-7 bg-gray-200 rounded-lg my-5">
         <div class="flex justify-between py-3">
-            <h4 class="py-3 text-lg font-semibold">Permission</h4>
-            <a href="{{ route('permission.create') }}"
+            <h4 class="py-3 text-lg font-semibold">Role</h4>
+            <a href="{{ route('role.create') }}"
                 class="border border-white bg-blue-500 text-white px-2 py-3 rounded transition-all duration-300 ease-linear">
-                Add Permission</a>
+                Add Role</a>
         </div>
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="text-gray-900">
@@ -34,7 +35,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($permissions as $permission)
+                        @forelse ($roles as $role)
                             <tr
                                 class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                                 <th scope="row"
@@ -42,14 +43,14 @@
                                     {{ $loop->index + 1 }}
                                 </th>
                                 <td class="px-6 py-4 capitalize">
-                                    {{ $permission->name }}
+                                    {{ $role->name }}
                                 </td>
 
                                 <td class="px-6 py-4 flex gap-3">
-                                    <a href="{{ route('permission.edit', $permission->id) }}"
+                                    <a href="{{ route('role.edit', $role->id) }}"
                                         class="font-medium text-white bg-green-500 hover:bg-green-700 transition-all duration-300 ease-in-out px-1.5 py-2 rounded">Edit</a>
 
-                                    <form action="{{ route('permission.destroy', $permission->id) }}" method="POST">
+                                    <form action="{{ route('role.destroy', $role->id) }}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button type="submit"
@@ -61,8 +62,8 @@
                         @empty
 
                             <td colspan="3">
-                                <div class="text-red-600 text-lg text-center fond-semibold px-2 py-4">
-                                    No Data Found</span>
+                                <div class="text-red-600 text-lg text-center fond-semibold px-2 py-4">No Data
+                                    Found</span>
                             </td>
                         @endforelse
 

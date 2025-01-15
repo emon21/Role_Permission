@@ -69,14 +69,13 @@ class PermissionController extends Controller
      */
     public function update(Request $request, Permission $permission)
     {
-        // $request->validate([
-        //     'name' => [
-        //         'required',
-        //         'string',
-        //         'unique:permissions,name',
-        //     ],
-
-        // ]);
+        $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'unique:roles,name,' . $permission->id,
+            ],
+        ]);
 
       //  Permission::findOrFail($id)->update(['name'=> $request->name]);
 
