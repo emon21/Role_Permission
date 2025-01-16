@@ -16,7 +16,7 @@
 
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="text-gray-900">
-                <form class="my-3 px-4" action="{{ route('role.update',$role) }}" method="POST">
+                <form class="my-3 px-4" action="{{ route('role.update', $role) }}" method="POST">
                     @csrf
                     @method('PUT')
 
@@ -26,6 +26,21 @@
                         <input type="text" id="email"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
                             placeholder="Name..." required name="name" value="{{ $role->name }}" />
+                    </div>
+
+                    <h2>Permission : </h2>
+                    <div class="grid grid-cols-4 mb-3">
+                        @if($permissions->isNotEmpty())
+                            @foreach ($permissions as $permission)
+                                <div class="flex gap-2 items-center">
+                                    <input {{ ($hasPermissions->contains($permission->name)) ? 'checked' : '' }} type="checkbox" class="rounded" name="permission[]" value="{{ $permission->name }}"
+                                        id="permission-{{ $permission->name }}">
+                                    <label for="permission-{{ $permission->name }}">{{ $permission->name }}</label>
+                                </div>
+                            @endforeach
+
+                        @endif
+                    
                     </div>
 
                     <button type="submit"

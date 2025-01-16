@@ -1,9 +1,12 @@
 <x-app-layout>
 
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Create Role') }}
-        </h2>
+    <x-slot name="header" >
+        <div class="flex gap-4 justify-between align-middle">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Create Role') }}
+            </h2>
+            <a href="#" class="bg-black px-2 py-1.5 text-white rounded transition-all duration-300 ease-linear">Role</a>
+        </div>
     </x-slot>
 
     <div class="max-w-7xl mx-auto  lg:px-7 pb-7 bg-gray-200 rounded-lg my-5">
@@ -24,6 +27,20 @@
                         <input type="text" id="email"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
                             placeholder="Name..." required name="name" />
+                    </div>
+
+                    <h2>Permission : </h2>
+                    <div class="grid grid-cols-4 mb-3">
+                        @if($permissions->isNotEmpty())
+                            @foreach ($permissions as $permission)
+                                <div class="flex gap-2 items-center">
+                                    <input type="checkbox" class="rounded" name="permission[]" value="{{ $permission->name }}" id="permission-{{ $permission->name }}">
+                                    <label for="permission-{{ $permission->name }}">{{ $permission->name }}</label>
+                                </div>
+                            @endforeach
+
+                        @endif
+
                     </div>
 
                     <button type="submit"

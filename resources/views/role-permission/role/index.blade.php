@@ -12,10 +12,10 @@
     
     <div class="max-w-7xl mx-auto  lg:px-7 pb-7 bg-gray-200 rounded-lg my-5">
         <div class="flex justify-between py-3">
-            <h4 class="py-3 text-lg font-semibold">Role</h4>
+            <h4 class="py-3 text-lg font-semibold">All Role</h4>
             <a href="{{ route('role.create') }}"
                 class="border border-white bg-blue-500 text-white px-2 py-3 rounded transition-all duration-300 ease-linear">
-                Add Role</a>
+                Create Role</a>
         </div>
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="text-gray-900">
@@ -28,6 +28,9 @@
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Name
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Permission
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Action
@@ -45,9 +48,21 @@
                                 <td class="px-6 py-4 capitalize">
                                     {{ $role->name }}
                                 </td>
+                                 <td class="px-6 py-4 capitalize">
+                                    @foreach ($role->permissions as $permission)
+
+                                        <span class="px-3 py-2 text-white bg-blue-500 rounded-lg">
+                                            {{ $permission->name }}</span>
+                                    @endforeach
+                                    {{-- <span class="px-3 py-2 text-white bg-gray-600">
+                                        {{ $role->permissions()->pluck('name') }}</span> --}}
+                                </td>
 
                                 <td class="px-6 py-4 flex gap-3">
-                                    <a href="{{ route('role.edit', $role->id) }}"
+                                    <a href="{{ url('role/' . $role->id . '/add-permission') }}"
+                                        class="font-medium text-white bg-green-500 hover:bg-green-700 transition-all duration-300 ease-in-out px-1.5 py-2 rounded">Add / Edit Role Permission</a>
+
+                                        <a href="{{ route('role.edit', $role->id) }}"
                                         class="font-medium text-white bg-green-500 hover:bg-green-700 transition-all duration-300 ease-in-out px-1.5 py-2 rounded">Edit</a>
 
                                     <form action="{{ route('role.destroy', $role->id) }}" method="POST">

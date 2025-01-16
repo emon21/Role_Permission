@@ -82,7 +82,7 @@ class PermissionController extends Controller
         $permission->update([
             'name' => $request->name
         ]);
-        
+
         return redirect('permission')->with('success', 'Permission Update Successfully');
     }
 
@@ -91,9 +91,9 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
-        //
+    
        $permission->delete();
-    //    Permission::destroy($permission->id);
+      // Permission::destroy($permission->id);
 
         return redirect('permission')->with('success', 'Permission Deleted Successfully');
     }

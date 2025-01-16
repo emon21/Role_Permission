@@ -36,7 +36,12 @@ Route::middleware('auth')->group(function () {
 # Route 
 
 Route::resource('permission', PermissionController::class);
+
 Route::resource('role', RoleController::class);
+
+Route::get('role/{role}/add-permission', [RoleController::class, 'addPermissionRole']);
+Route::put('role/{role}/give-permission', [RoleController::class, 'givePermissionRole']);
+
 
 require __DIR__ . '/auth.php';
 // require __DIR__ . '/admin.php';
